@@ -8,7 +8,7 @@ We are instructed to provide examples of selected concepts covered in the CC tex
 [cc_bad_code.ts](https://github.com/wafibismail/cc_homework_4/blob/master/cc_bad_code.ts) contains the code that needs refining <br>
 [cc_clean_code.ts](https://github.com/wafibismail/cc_homework_4/blob/master/cc_clean_code.ts) the result
 
-## Typescript
+## Regarding TypeScript
 Private variables are identified with #'s e.g.
 ```typescript
 class Coordinate {
