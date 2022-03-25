@@ -1,4 +1,4 @@
-{
+{//start of encapsulation
 //Data Abstraction
 class GradeRecord {
     gpa: number[];
@@ -167,4 +167,35 @@ while (firstPocket.isHeavy()) {
 //firstPocket is now light;
 
 
+
+//Data Transfer Objects - Undesirable: Active records
+
+//Assuming Folder is a record with properties id, parentId and name,
+//a children property on the frontend implementation was made for ease of access
+
+class Folder {
+    #id:number;
+    #parentId:number;
+    #name:string;
+    #children:Folder[];
+
+    constructor(id:number, parentId:number, name:string, dataSource:Folder[]) {
+        this.#id = id;
+        this.#parentId = id;
+        this.#name = name;
+        this.#addChildren(dataSource);
+    }
+
+    getId() {return this.#id};
+    getName() {return this.#name};
+    getChildren() {return this.#children};
+
+    #addChildren(dataSource:Folder[]) {
+        dataSource.forEach(folder => {
+            if (folder.#parentId == this.#id)
+                this.#children.push(folder);
+        });
+    }
 }
+
+}//end of encapsulation

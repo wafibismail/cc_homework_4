@@ -1,4 +1,4 @@
-{
+{//start of encapsulation
 //Data Abstraction
 interface GradeRecord {
     getGpa(semester:number):number;
@@ -176,4 +176,86 @@ weightMeasurements.forEach(measurement => {
 });
 //firstPocket is now light;
 
+
+
+//Data Transfer Objects - Undesirable: Active records
+
+//Instead of implementing logic in the data transfer object itself, having another object such as an iterable
+//would be more appropriate. 
+
+class FolderDto {
+    #id:number;
+    #parentId:number;
+    #name:string;
+
+    constructor(id:number, parentId:number, name:string) {
+        this.#id = id;
+        this.#parentId = parentId;
+        this.#name = name;
+    }
+
+    getId() {return this.#id};
+    getParentId() {return this.#parentId};
+    getName() {return this.#name};
 }
+
+class FolderIterable {
+    #id:number;
+    #name:string;
+    #children:FolderDto[];
+
+    constructor(folderDto:FolderDto, dataSource:FolderDto[]){
+        this.#id = folderDto.getId();
+        this.#name = folderDto.getName();
+        this.#setChildren(dataSource);
+    }
+
+    getId() {return this.#id};
+    getName() {return this.#name};
+    getChildren() {return this.#children};
+
+    #setChildren(dataSource:FolderDto[]) {
+        dataSource.forEach(folder => {
+            if (folder.getParentId() == this.#id){
+                this.#children.push(folder);
+            }
+        });
+    }
+}
+
+class FolderHandler {
+    #source:FolderDto[];
+    constructor(source:FolderDto[]) {
+        this.#source = source;
+    }
+    getChildrenIterables = (folderIterable:FolderIterable) => {
+        let children:FolderIterable[] = [];
+        let childrenDto = folderIterable.getChildren();
+        childrenDto.forEach(dto => {
+            children.push(this.getIterableByDto(dto));
+        });
+        return children;
+    }
+    getIterableByName = (name:string) => {
+        let source = this.#source;
+        for (let i = 0; i < source.length; i++){
+            let currentName = source[i].getName();
+            if (currentName.includes(name))
+                return this.getIterableByDto(source[i]);
+        }
+    };
+    getIterableByDto = (folderDto:FolderDto) => {return new FolderIterable(folderDto, this.#source)};
+}
+
+let mockData:FolderDto[] = [
+    new FolderDto(0, null, "home"),
+    new FolderDto(1, 0, "documents"),
+    new FolderDto(2, 0, "pictures"),
+];
+
+const dataHandler = new FolderHandler(mockData);
+const homeFolderIterable = dataHandler.getIterableByName("home");
+const homeChildrenFolderIterables = dataHandler.getChildrenIterables(homeFolderIterable);
+
+
+}//end of encapsulation
