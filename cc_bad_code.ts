@@ -210,9 +210,12 @@ class Folder {
 {//Start of chapter 8 - Boundaries
 //Encapsulating interfaces
 let storageForUserNames = {};
+//I have to imagine that instead of a regular JavaScript object, this extends a Map-like implementation from an external library that can change anytime
 storageForUserNames['00001'] = "Fluffy"
 storageForUserNames['00002'] = "Tom"
 storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it is.
 console.log(storageForUserNames['00001']);
+
+
 
 }//End of chapter 8 - Boundaries

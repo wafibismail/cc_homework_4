@@ -283,7 +283,7 @@ traverseAndDisplayNames(home);
 {//Start of chapter 8 - Boundaries
 //Encapsulating interfaces
 class UserNamesStorage {
-    #names = {};
+    #names = {};//Imagine that instead of a regular JavaScript object, this extends a Map-like implementation from an external library
     getById(id:string) {
         this.#validateId(id);
         return this.#names[id];
