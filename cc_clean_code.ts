@@ -255,6 +255,7 @@ let mockData:FolderDto[] = [
     new FolderDto(0, null, "home"),
     new FolderDto(1, 0, "documents"),
     new FolderDto(2, 0, "pictures"),
+    new FolderDto(3, 1, "drafts"),
 ];
 
 function traverseAndDisplayNames(folderIterable:FolderIterable) {
@@ -274,8 +275,33 @@ traverseAndDisplayNames(home);
 
 
 {//Start of chapter 7 - Error Handling
+//Use exceptions rather than return codes - will get back to this later
+
 }//End of chapter 7 - Error Handling
 
 
 {//Start of chapter 8 - Boundaries
+//Encapsulating interfaces
+class UserNamesStorage {
+    #names = {};
+    getById(id:string) {
+        this.#validateId(id);
+        return this.#names[id];
+    }
+    setIdNamePair(id:string, name:string) {
+        this.#validateId(id);
+        this.#names[id] = name;
+    }
+    #validateId(id:string) {
+        if (id.length != 5 || isNaN(Number(id))) {
+            throw Error("Invalid id; Must be 5 digit string");
+        }
+    }
+
+}
+let storageForUserNames = new UserNamesStorage;
+storageForUserNames.setIdNamePair('00001',"Fluffy");
+storageForUserNames.setIdNamePair('00002',"Tom");
+storageForUserNames.setIdNamePair('BAX8080',"20 seater bus"); //should throw an error.
+console.log(storageForUserNames.getById('00001'));
 }//End of chapter 8 - Boundaries

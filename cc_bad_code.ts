@@ -202,8 +202,17 @@ class Folder {
 
 
 {//Start of chapter 7 - Error Handling
+//Use exceptions rather than return codes
+//I will get back to this section later
 }//End of chapter 7 - Error Handling
 
 
 {//Start of chapter 8 - Boundaries
+//Encapsulating interfaces
+let storageForUserNames = {};
+storageForUserNames['00001'] = "Fluffy"
+storageForUserNames['00002'] = "Tom"
+storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it is.
+console.log(storageForUserNames['00001']);
+
 }//End of chapter 8 - Boundaries
