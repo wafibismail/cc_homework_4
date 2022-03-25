@@ -199,3 +199,11 @@ class Folder {
 }
 
 }//End of chapter 6 - Objects and Data Structures
+
+
+{//Start of chapter 7 - Error Handling
+}//End of chapter 7 - Error Handling
+
+
+{//Start of chapter 8 - Boundaries
+}//End of chapter 8 - Boundaries
