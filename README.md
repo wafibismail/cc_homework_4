@@ -16,6 +16,7 @@ class Coordinate {
     #y:number;
 }
 let coord = new Coordinate();
+
 coord.x++; //This is allowed
 coord.#y++; //This is not, and will prevent TypeScript->JavaScript transpilation.
 ```
@@ -27,15 +28,18 @@ const coord = {
     x:10;
     y:20;
 }
+
 //assigning a variable anywhere else e.g. a class's default instance variables
 class Coordinate {
     #x = 10;
     #y = 20;
 }
+
 //declaring types
 var someNumber:number;
 someNumber = 10; //works
 someNumber = "a": //doesn't
+
 //both
 class Coordinate {
     #x:number = 10;
