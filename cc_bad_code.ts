@@ -1,4 +1,4 @@
-{//start of encapsulation
+{//Start of chapter 6 - Objects and Data Structures
 //Data Abstraction
 class GradeRecord {
     gpa: number[];
@@ -198,4 +198,4 @@ class Folder {
     }
 }
 
-}//end of encapsulation
+}//End of chapter 6 - Objects and Data Structures

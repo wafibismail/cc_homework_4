@@ -1,4 +1,4 @@
-{//start of encapsulation
+{//Start of chapter 6 - Objects and Data Structures
 //Data Abstraction
 interface GradeRecord {
     getGpa(semester:number):number;
@@ -271,4 +271,4 @@ traverseAndDisplayNames(home);
 //all folders including deep-nested subfolders will be displayed by name
 
 
-}//end of encapsulation
+}//End of chapter 6 - Objects and Data Structures
