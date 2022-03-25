@@ -202,22 +202,24 @@ class FolderDto {
 class FolderIterable {
     #id:number;
     #name:string;
-    #children:FolderDto[];
+    #childDtos:FolderDto[];
+    #handler:FolderHandler;
 
-    constructor(folderDto:FolderDto, dataSource:FolderDto[]){
+    constructor(folderDto:FolderDto, handlerData:{handler:FolderHandler, dataSource:FolderDto[]}){
         this.#id = folderDto.getId();
         this.#name = folderDto.getName();
-        this.#setChildren(dataSource);
+        this.#setChildDtos(handlerData.dataSource);
+        this.#handler = handlerData.handler;
     }
 
     getId() {return this.#id};
     getName() {return this.#name};
-    getChildren() {return this.#children};
+    getChildren() {return this.#handler.getChildrenIterables(this.#childDtos)};
 
-    #setChildren(dataSource:FolderDto[]) {
+    #setChildDtos(dataSource:FolderDto[]) {
         dataSource.forEach(folder => {
             if (folder.getParentId() == this.#id){
-                this.#children.push(folder);
+                this.#childDtos.push(folder);
             }
         });
     }
@@ -228,10 +230,9 @@ class FolderHandler {
     constructor(source:FolderDto[]) {
         this.#source = source;
     }
-    getChildrenIterables = (folderIterable:FolderIterable) => {
+    getChildrenIterables = (childrenDtos:FolderDto[]) => {
         let children:FolderIterable[] = [];
-        let childrenDto = folderIterable.getChildren();
-        childrenDto.forEach(dto => {
+        childrenDtos.forEach(dto => {
             children.push(this.getIterableByDto(dto));
         });
         return children;
@@ -244,7 +245,10 @@ class FolderHandler {
                 return this.getIterableByDto(source[i]);
         }
     };
-    getIterableByDto = (folderDto:FolderDto) => {return new FolderIterable(folderDto, this.#source)};
+    getIterableByDto = (folderDto:FolderDto) => {
+        let handlerData = {handler:this, dataSource:this.#source}
+        return new FolderIterable(folderDto, handlerData)
+    };
 }
 
 let mockData:FolderDto[] = [
@@ -253,9 +257,18 @@ let mockData:FolderDto[] = [
     new FolderDto(2, 0, "pictures"),
 ];
 
+function traverseAndDisplayNames(folderIterable:FolderIterable) {
+    folderIterable.getChildren().forEach(child => {
+        console.log(`Inside ${folderIterable.getName()} is another folder named ${child.getName()}`);
+        traverseAndDisplayNames(child);
+    });
+}
+
 const dataHandler = new FolderHandler(mockData);
-const homeFolderIterable = dataHandler.getIterableByName("home");
-const homeChildrenFolderIterables = dataHandler.getChildrenIterables(homeFolderIterable);
+const home = dataHandler.getIterableByName("home");
+
+traverseAndDisplayNames(home);
+//all folders including deep-nested subfolders will be displayed by name
 
 
 }//end of encapsulation
