@@ -104,7 +104,7 @@ station.refillUses(someStick);
 
 
 //Hiding Structure
-//Now, only access to backpack and pocket is required, while still being able to obtain value of one of cloth's instance variable
+//Now, only access to backpack is required, while still being able to obtain value of one of cloth's instance variable
 class Cloth {
     #weight: number = 100;
 
