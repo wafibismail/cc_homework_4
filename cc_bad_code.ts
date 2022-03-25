@@ -37,27 +37,27 @@ class DOM_Handler {
         let children = htmlContainer.children;
         
         if (typeof htmlContainer === typeof NestedUListContainer) {
-            let list =
+            let list:Node =
                 node.hasChildNodes() ?
                     node.firstChild :
-                    document.createElement("ul");
+                    (document.createElement("ul"));
+            node.appendChild(list);
 
             for (const child of children) {
                 list.appendChild(child);
             }
         }
-
         else if (typeof htmlContainer === typeof NestedOListContainer) {
             let list =
                 node.hasChildNodes() ?
                     node.firstChild :
                     document.createElement("ol");
+            node.appendChild(list);
 
             for (const child of children) {
                 list.appendChild(child);
             }
         }
-
         else  {
             for (const child of children) {
                 node.appendChild(child);
