@@ -102,4 +102,68 @@ while (someStick.use()) {
 station.refillUses(someStick);
 //The stick has been refreshed
 
+
+//Hiding Structure
+//Now, only access to backpack and pocket is required, while still being able to obtain value of one of cloth's instance variable
+class Cloth {
+    #weight: number = 100;
+
+    wring() { this.#weight /= 2; }
+    getWeight() { return this.#weight; };
+}
+class Pocket {
+    #content: Cloth[];
+
+    constructor() {
+        let randomAmount = Math.random() * 10;
+        while (this.#content.length < randomAmount)
+            this.#content.push(new Cloth());
+    }
+
+    extractCloth() { return this.#content.pop(); };
+    insertCloth(cloth: Cloth) { this.#content.push(cloth); };
+    getWeight() {
+        let weight = 0;
+        this.#content.forEach(cloth => {
+            weight += cloth.getWeight();
+        });
+        return weight;
+    }
+    isHeavy() {
+        return this.getWeight() > 100;
+    }
+    wringAndMeasureCloth() {
+        const currentCloth = this.extractCloth();
+        currentCloth.wring();
+        const clothWeight = currentCloth.getWeight();
+        this.insertCloth(currentCloth);
+        return clothWeight;
+    }
+}
+class Backpack {
+    #pockets: Pocket[] = [];
+
+    constructor(numPockets: number) {
+        while (this.#pockets.length < numPockets)
+            this.#pockets.push(new Pocket());
+    }
+
+    getFirstHeavyPocket() {
+        if (this.#pockets.length) {
+            for (var i = 0; i < this.#pockets.length; i++) {
+                if (this.#pockets[i].isHeavy()) return this.#pockets[i];
+            }
+        }
+    }
+}
+
+const myBackPack = new Backpack(5);
+let firstPocket = myBackPack.getFirstHeavyPocket();
+//No direct access to the cloth is required
+while (firstPocket.isHeavy()) {
+    let wringedClothWeight = firstPocket.wringAndMeasureCloth();
+    alert("Current cloth has weight: " + wringedClothWeight);
+}
+//firstPocket is now light;
+
 }
