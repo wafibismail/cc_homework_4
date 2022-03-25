@@ -178,7 +178,7 @@ weightMeasurements.forEach(measurement => {
 
 
 
-//Data Transfer Objects - Undesirable: Active records
+//Data Transfer Objects - Logic for active records
 
 //Instead of implementing logic in the data transfer object itself, having another object such as an iterable
 //would be more appropriate. 

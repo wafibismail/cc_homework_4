@@ -168,7 +168,7 @@ while (firstPocket.isHeavy()) {
 
 
 
-//Data Transfer Objects - Undesirable: Active records
+//Data Transfer Objects - Undesirable: storing logic within active records
 
 //Assuming Folder is a record with properties id, parentId and name,
 //a children property on the frontend implementation was made for ease of access
