@@ -216,6 +216,6 @@ storageForUserNames['00002'] = "Tom"
 storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it is.
 console.log(storageForUserNames['00001']);
 
-
+//Exploring and learning boundaries
 
 }//End of chapter 8 - Boundaries
