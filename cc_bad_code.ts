@@ -37,7 +37,7 @@ class DOM_Handler {
         let children = htmlContainer.children;
         
         if (typeof htmlContainer === typeof NestedUListContainer) {
-            let list:Node =
+            let list =
                 node.hasChildNodes() ?
                     node.firstChild :
                     (document.createElement("ul"));
