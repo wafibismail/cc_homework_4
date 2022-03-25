@@ -69,7 +69,8 @@ class DOM_Handler {
 //The Law of Demeter
 let name:string = document.querySelector("#MainForm").getElementsByClassName("user-name")[0].querySelector("value").innerHTML;
 
-//Hybrids - data structure object should be avoided. Currently StickWeapon has public instance variables
+//Hybrids - data structure object should be avoided.
+//Currently StickWeapon has public instance variables modifiable via its functions as well as externally.
 const stick = {label: "Stick", maxUses: 500, maxPower: 5};
 class StickWeapon {
     type = stick;

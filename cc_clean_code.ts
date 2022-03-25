@@ -61,7 +61,7 @@ let mainForm = document.querySelector("#MainForm");
 let nameFieldContainer = mainForm.querySelector("user-name");
 let name = nameFieldContainer.querySelector("value").innerHTML;
 
-//Hybrids - all the instance variables are private, and can now only be accessed through the instance functions
+//Hybrids - Now, all the instance variables are private, and can now only be accessed through the instance functions
 const stick = {label: "Stick", maxUses: 500, maxPower: 5};
 class StickWeapon {
     #type = stick;
