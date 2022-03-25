@@ -92,8 +92,8 @@ class RefillStation {
     }
 }
 
-let someStick = new StickWeapon();
 let station = new RefillStation();
+let someStick = new StickWeapon();
 
 while (someStick.use()) {
     //The stick is being used
