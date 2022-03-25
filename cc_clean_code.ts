@@ -56,4 +56,50 @@ class NestedUListContainer extends HTMLContainer {
     }
 }
 
+//The Law of Demeter
+let mainForm = document.querySelector("#MainForm");
+let nameFieldContainer = mainForm.querySelector("user-name");
+let name = nameFieldContainer.querySelector("value").innerHTML;
+
+//Hybrids - all the instance variables are private, and can now only be accessed through the instance functions
+const stick = {label: "Stick", maxUses: 500, maxPower: 5};
+class StickWeapon {
+    #type = stick;
+    #uses: number;
+    #power: number;
+    #label: string;
+    
+    constructor() {
+        let type = this.#type;
+
+        this.#uses = Math.round(Math.max(type.maxUses/5, type.maxUses*Math.random()));
+        this.#power = Math.round(Math.max(type.maxPower/5, type.maxPower*Math.random()));
+        this.#label = `${type.label} Lvl ${this.#power}`;
+    }
+    use = () => {
+        if (this.#uses) this.#uses--;
+        else return false;
+        return true;
+    }
+    refillUses = () => {
+        this.#uses = this.#type.maxUses;
+    }
+}
+
+class RefillStation {
+    refillUses(weapon: StickWeapon) {
+        weapon.refillUses();
+    }
+}
+
+let someStick = new StickWeapon();
+let station = new RefillStation();
+
+while (someStick.use()) {
+    //The stick is being used
+}
+
+station.refillUses(someStick);
+//The stick has been refreshed
+
 }

@@ -66,4 +66,44 @@ class DOM_Handler {
     }
 }
 
+//The Law of Demeter
+let name:string = document.querySelector("#MainForm").getElementsByClassName("user-name")[0].querySelector("value").innerHTML;
+
+//Hybrids - data structure object should be avoided. Currently StickWeapon has public instance variables
+const stick = {label: "Stick", maxUses: 500, maxPower: 5};
+class StickWeapon {
+    type = stick;
+    uses: number;
+    power: number;
+    label: string;
+    
+    constructor() {
+        let type = this.type;
+
+        this.uses = Math.round(Math.max(type.maxUses/5, type.maxUses*Math.random()));
+        this.power = Math.round(Math.max(type.maxPower/5, type.maxPower*Math.random()));
+        this.label = `${type.label} Lvl ${this.power}`;
+    }
+    use = () => {
+        if (this.uses) this.uses--;
+        else return false;
+        return true;
+    }
+}
+
+class RefillStation {
+    refillUses(weapon: StickWeapon) {
+        weapon.uses = weapon.type.maxUses;
+    }
+}
+
+let station = new RefillStation();
+let someStick = new StickWeapon();
+
+while (someStick.use()) {
+    //The stick is being used
+}
+station.refillUses(someStick);
+//The stick has been refreshed
+
 }
