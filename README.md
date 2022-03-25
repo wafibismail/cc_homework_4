@@ -22,12 +22,12 @@ coord.#y++; //This is not, and will prevent TypeScript->JavaScript transpilation
 
 Semicolons are used for either type declaration or property assignment, e.g.:
 ```typescript
-//setting properties of an object
+//assigning properties of an object
 const coord = {
     x:10;
     y:20;
 }
-//setting a variable anywhere else e.g. a class's default instance variables
+//assigning a variable anywhere else e.g. a class's default instance variables
 class Coordinate {
     #x = 10;
     #y = 20;
