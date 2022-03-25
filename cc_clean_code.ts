@@ -214,7 +214,7 @@ class FolderIterable {
 
     getId() {return this.#id};
     getName() {return this.#name};
-    getChildren() {return this.#handler.getChildrenIterables(this.#childDtos)};
+    getChildren() {return this.#handler.getIterablesByDtoArray(this.#childDtos)};
 
     #setChildDtos(dataSource:FolderDto[]) {
         dataSource.forEach(folder => {
@@ -230,7 +230,7 @@ class FolderHandler {
     constructor(source:FolderDto[]) {
         this.#source = source;
     }
-    getChildrenIterables = (childrenDtos:FolderDto[]) => {
+    getIterablesByDtoArray = (childrenDtos:FolderDto[]) => {
         let children:FolderIterable[] = [];
         childrenDtos.forEach(dto => {
             children.push(this.getIterableByDto(dto));
