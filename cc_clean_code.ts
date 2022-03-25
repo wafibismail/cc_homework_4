@@ -132,7 +132,7 @@ class Pocket {
     isHeavy() {
         return this.getWeight() > 100;
     }
-    wringAndMeasureCloth() {
+    wringAndMeasureACloth() {
         const currentCloth = this.extractCloth();
         currentCloth.wring();
         const clothWeight = currentCloth.getWeight();
@@ -149,9 +149,10 @@ class Backpack {
     }
 
     getFirstHeavyPocket() {
-        if (this.#pockets.length) {
-            for (var i = 0; i < this.#pockets.length; i++) {
-                if (this.#pockets[i].isHeavy()) return this.#pockets[i];
+        const pockets = this.#pockets;
+        if (pockets.length) {
+            for (var i = 0; i < pockets.length; i++) {
+                if (pockets[i].isHeavy()) return pockets[i];
             }
         }
     }
@@ -161,7 +162,7 @@ const myBackPack = new Backpack(5);
 let firstPocket = myBackPack.getFirstHeavyPocket();
 //No direct access to the cloth is required
 while (firstPocket.isHeavy()) {
-    let wringedClothWeight = firstPocket.wringAndMeasureCloth();
+    let wringedClothWeight = firstPocket.wringAndMeasureACloth();
     alert("Current cloth has weight: " + wringedClothWeight);
 }
 //firstPocket is now light;

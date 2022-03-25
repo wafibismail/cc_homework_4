@@ -147,9 +147,10 @@ class Backpack {
     }
 
     getFirstHeavyPocket() {
-        if (this.#pockets.length) {
-            for (var i = 0; i < this.#pockets.length; i++) {
-                if (this.#pockets[i].isHeavy()) return this.#pockets[i];
+        const pockets = this.#pockets;
+        if (pockets.length) {
+            for (var i = 0; i < pockets.length; i++) {
+                if (pockets[i].isHeavy()) return pockets[i];
             }
         }
     }
