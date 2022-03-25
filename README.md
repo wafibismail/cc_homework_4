@@ -18,4 +18,4 @@ class Coordinate {
 let coord = new Coordinate();
 coord.x++; //This is allowed
 coord.#y++; //This is not, and will prevent TypeScript->JavaScript transpilation.
-``
+```
