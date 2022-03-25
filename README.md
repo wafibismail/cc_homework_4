@@ -21,9 +21,9 @@ coord.x++; //This is allowed
 coord.#y++; //This is not, and will prevent TypeScript->JavaScript transpilation.
 ```
 
-Semicolons are used for either type declaration or property assignment, e.g.:
+Semicolons are used for either type declaration or attribute assignment, e.g.:
 ```typescript
-//assigning properties of an object
+//assigning attributes of an object
 const coord = {
     x:10;
     y:20;
