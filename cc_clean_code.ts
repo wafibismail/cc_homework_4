@@ -156,15 +156,24 @@ class Backpack {
             }
         }
     }
+
+    wringAndMeasureFromFirstHeavyPocket() {
+        const firstPocket = this.getFirstHeavyPocket();
+        let measurements:number[] = [];
+        while (firstPocket.isHeavy()) {
+            let wringedClothWeight = firstPocket.wringAndMeasureACloth();
+            measurements.push(wringedClothWeight);
+        }
+        return measurements;
+    }
 }
 
 const myBackPack = new Backpack(5);
-let firstPocket = myBackPack.getFirstHeavyPocket();
-//No direct access to the cloth is required
-while (firstPocket.isHeavy()) {
-    let wringedClothWeight = firstPocket.wringAndMeasureACloth();
-    alert("Current cloth has weight: " + wringedClothWeight);
-}
+//No direct access to the cloth or the pocket is required
+let weightMeasurements = myBackPack.wringAndMeasureFromFirstHeavyPocket();
+weightMeasurements.forEach(measurement => {
+    alert("The cloth weighs: " +  measurement);
+});
 //firstPocket is now light;
 
 }
