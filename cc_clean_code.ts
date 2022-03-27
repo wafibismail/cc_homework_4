@@ -274,9 +274,15 @@ traverseAndDisplayNames(home);
 }//End of chapter 6 - Objects and Data Structures
 
 
-{//Start of chapter 7 - Error Handling
-//Use exceptions rather than return codes - will get back to this later
-
+{//Start of chapter 7 - Error Handling - will get back to this later
+//Use exceptions rather than return codes
+//Write Your Try-Catch-Finally Statement First
+//Use Unchecked Exceptions
+//Provide Context with Exceptions
+//Define Exception Classes in Terms of a Caller’s Needs
+//Define the Normal Flow
+//Don’t Return Null
+//Don’t Pass Null
 }//End of chapter 7 - Error Handling
 
 
@@ -309,14 +315,14 @@ console.log(storageForUserNames.getById('00001'));
 //Exploring and learning boundaries - automated boundary tests/checks on external APIs - able to detect breaking changes easily
 const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
 const router = {
-    //fake router for the sake of explanation
+    //fake router for the sake of demonstration
     fetch: function(path:string) {
         return new Response(`Response successfully fetched from ${path}`);
     },
     get: function(path:string, handler:Object, handler2:Object ) {}
 };
 describe("mockImportedRouteGuard", () => {
-    it("should allow a request that has a fresh & valid accessToken attached", () => {
+    it("should by default return an OK response", () => {
         let path = "/api/users";
 
         router.get(path, mockImportedRouteGuard, (req, res) => {
@@ -383,7 +389,8 @@ let controller = new DrawingController(new FakeDrawer);
 controller.drawCircle(p[0], 3);
 controller.drawRect(p[2], p[1]);
 controller.drawLine(p[4], p[3]);
-/*With the use of the Drawer interface, it becomes easier to implement the API that does not yet exist */
+/*With the use of the Drawer interface, it becomes easier to implement the API that does not yet exist
+Changes can be accomodated without huge rework in the code i.e. there is a clear boundary*/
 class FutureDrawerAdapter implements Drawer {
     #api:Object;
     drawLine(start: Coord, end: Coord): void {
