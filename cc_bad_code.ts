@@ -217,12 +217,48 @@ storageForUserNames['00002'] = "Tom"
 storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it is.
 console.log(storageForUserNames['00001']);
 
-//Exploring and learning boundaries - learning by trial and error - difficult to detect errors due to changes in external api
+//Exploring and learning boundaries - learning by trial and error - difficult to detect future errors from unexpected changes on external api
 const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
 const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
 mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
     res.status(200).json("test")
 });
 
+//Using code that does not yet exist
+class Coord {
+    #x:number; #y:number;
+    constructor(x:number, y:number) {
+        this.#x = x; this.#y = y;
+    }
+    get = () => {
+        return {x:this.#x, y:this.#y};
+    }
+}
+class FakeDrawingController {
+    drawLine(start: Coord, end: Coord): void {
+        const a = start.get(), b = end.get();
+        console.log(`Line drawn from ${a.x},${a.y} to ${b.x},${b.y}`);
+    }
+    drawRect(start: Coord, end: Coord): void {
+        const a = start.get(), b = end.get();
+        console.log(`Rectangle drawn from ${a.x},${a.y} to ${b.x},${b.y}`);
+    }
+    drawCircle(center: Coord, radius: number): void {
+        const p = center.get()
+        console.log(`Circle drawn at point ${p.x},${p.y} with radius ${radius}`);
+    }
+}
+let p:Coord[] = [
+    new Coord(0,0),
+    new Coord(1,0),
+    new Coord(0,1),
+    new Coord(0,2),
+    new Coord(0,3),
+];
+let controller = new FakeDrawingController;
+controller.drawCircle(p[0], 3);
+controller.drawRect(p[2], p[1]);
+controller.drawLine(p[4], p[3]);
+//with this style of coding, significant work needs to be done to implement the "future" code
 
 }//End of chapter 8 - Boundaries
