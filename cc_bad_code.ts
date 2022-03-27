@@ -217,7 +217,7 @@ storageForUserNames['00002'] = "Tom"
 storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it is.
 console.log(storageForUserNames['00001']);
 
-//Exploring and learning boundaries - learning by trial and error
+//Exploring and learning boundaries - learning by trial and error - difficult to detect errors due to changes in external api
 const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
 const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
 mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
