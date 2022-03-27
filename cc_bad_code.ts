@@ -201,7 +201,7 @@ class Folder {
 }//End of chapter 6 - Objects and Data Structures
 
 
-{//Start of chapter 7 - Error Handling - I might add on these uncovered parts later:
+{//Start of chapter 7 - Error Handling - I might add on these not-yet-covered parts later:
 //Use exceptions rather than return codes
 //Write Your Try-Catch-Finally Statement First
 //Use Unchecked Exceptions
