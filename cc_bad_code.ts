@@ -201,13 +201,14 @@ class Folder {
 }//End of chapter 6 - Objects and Data Structures
 
 
-{//Start of chapter 7 - Error Handling - will get back to this later
+{//Start of chapter 7 - Error Handling - I might add on these uncovered parts later:
 //Use exceptions rather than return codes
 //Write Your Try-Catch-Finally Statement First
 //Use Unchecked Exceptions
 //Provide Context with Exceptions
 //Define Exception Classes in Terms of a Caller’s Needs
 //Define the Normal Flow
+
 //Don’t Return Null
 const ACCOUNTS = {
     "Stud0001": {
