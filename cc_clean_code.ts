@@ -308,12 +308,23 @@ console.log(storageForUserNames.getById('00001'));
 
 //Exploring and learning boundaries - automated boundary tests/checks on external APIs - able to detect breaking changes easily
 const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
-const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
-describe("mockImportedModule", () => {
+const router = {
+    //fake router for the sake of explanation
+    fetch: function(path:string) {
+        return new Response(`Response successfully fetched from ${path}`);
+    },
+    get: function(path:string, handler:Object, handler2:Object ) {}
+};
+describe("mockImportedRouteGuard", () => {
     it("should allow a request that has a fresh & valid accessToken attached", () => {
-        mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
+        let path = "/api/users";
+
+        router.get(path, mockImportedRouteGuard, (req, res) => {
             res.status(200).json("request accepted and responded to")
         });
+
+        expect(router.fetch(path)).toContain("success");
+        //Assuming this test passes, future failure will mean a breaking change in the external package
     });
 });
 
