@@ -306,7 +306,7 @@ storageForUserNames.setIdNamePair('00002',"Tom");
 storageForUserNames.setIdNamePair('BAX8080',"20 seater bus"); //should throw an error.
 console.log(storageForUserNames.getById('00001'));
 
-//Exploring and learning boundaries
+//Exploring and learning boundaries - automating tests
 const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
 const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
 mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
