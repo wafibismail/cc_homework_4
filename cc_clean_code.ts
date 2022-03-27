@@ -324,7 +324,7 @@ describe("mockImportedRouteGuard", () => {
         });
 
         expect(router.fetch(path)).toContain("success");
-        //Assuming this test passes, future failure will mean a breaking change was made in the external package
+        //Assuming this test passes, future failure would mean a breaking change was made in the external package
     });
 });
 
