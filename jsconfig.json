@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "module":"ESNext",
         "target": "es2017"
     },
     "typeAcquisition": {

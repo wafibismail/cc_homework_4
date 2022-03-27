@@ -282,8 +282,9 @@ traverseAndDisplayNames(home);
 
 {//Start of chapter 8 - Boundaries
 //Encapsulating interfaces
+class Map {};
 class UserNamesStorage {
-    #names = {};//Imagine that instead of a regular JavaScript object, this extends a Map-like implementation from an external library
+    #names = new Map;//Imagine that instead of a regular JavaScript object, this extends a Map-like implementation from an external library
     getById(id:string) {
         this.#validateId(id);
         return this.#names[id];
@@ -304,4 +305,18 @@ storageForUserNames.setIdNamePair('00001',"Fluffy");
 storageForUserNames.setIdNamePair('00002',"Tom");
 storageForUserNames.setIdNamePair('BAX8080',"20 seater bus"); //should throw an error.
 console.log(storageForUserNames.getById('00001'));
+
+//Exploring and learning boundaries
+const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
+const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
+mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
+    res.status(200).json("test")
+});
+describe("mockImportedModule", () => {
+    it("should allow a request that has a fresh & valid accessToken attached", () => {
+        mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
+            res.status(200).json("request accepted and responded to")
+        });
+    });
+});
 }//End of chapter 8 - Boundaries

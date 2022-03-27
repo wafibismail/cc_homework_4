@@ -209,7 +209,8 @@ class Folder {
 
 {//Start of chapter 8 - Boundaries
 //Encapsulating interfaces
-let storageForUserNames = {};
+class Map {};
+let storageForUserNames = new Map;
 //I have to imagine that instead of a regular JavaScript object, this extends a Map-like implementation from an external library that can change anytime
 storageForUserNames['00001'] = "Fluffy"
 storageForUserNames['00002'] = "Tom"
@@ -217,5 +218,11 @@ storageForUserNames['BAX8080'] = "20 seater bus" //should not be allowed but it 
 console.log(storageForUserNames['00001']);
 
 //Exploring and learning boundaries
+const mockImportedRouteGuard = {auth: () => {/*validate accessToken}*/}};
+const mockRouter = {get: function(path:string, handler:Object, handler2:Object ) {}};
+mockRouter.get("/api/users", mockImportedRouteGuard, (req, res) => {
+    res.status(200).json("test")
+});
+
 
 }//End of chapter 8 - Boundaries
