@@ -209,7 +209,45 @@ class Folder {
 //Define Exception Classes in Terms of a Caller’s Needs
 //Define the Normal Flow
 //Don’t Return Null
-//Don’t Pass Null
+const ACCOUNTS = {
+    "Stud0001": {
+        name:"Bob",
+        cGpa:4.3
+    },
+    "Stud0002": {
+        name:"Mary",
+        cGpa:4.3
+    }
+};
+let getAccountByName = function(userName:string) {
+    let account = null;
+    Object.entries(ACCOUNTS).forEach(([key,value]) => {
+        account = {
+            id: key,
+            name: value.name,
+            cGpa: value.cGpa
+        }
+    });
+    return account;
+}
+let displayCgpa = function(account:Object) {
+    if (account) {
+        console.log(`${account[`name`]}'s CGPA is ${account['cGpa']}`)
+    }
+    else console.log('No matching account found');
+}
+let mikeAcc = getAccountByName("Mike");//this would be return null
+displayCgpa(mikeAcc);//though the program works as expected, it is bad practice
+
+//Don’t Pass Null - e.g. in an add function
+let add = function(nums:number[]):number {
+    let sum = 0;
+    nums.forEach(num => {
+        sum += num;
+    });
+    return sum;
+}
+add([1,2,null]);
 }//End of chapter 7 - Error Handling
 
 

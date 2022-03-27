@@ -281,8 +281,56 @@ traverseAndDisplayNames(home);
 //Provide Context with Exceptions
 //Define Exception Classes in Terms of a Caller’s Needs
 //Define the Normal Flow
+
 //Don’t Return Null
+const ACCOUNTS = {
+    "Stud0001": {
+        name:"Bob",
+        cGpa:4.3
+    },
+    "Stud0002": {
+        name:"Mary",
+        cGpa:4.3
+    }
+};
+let getAccountByName = function(userName:string) {
+    let account;
+    Object.entries(ACCOUNTS).forEach(([key,value]) => {
+        account = {
+            id: key,
+            name: value.name,
+            cGpa: value.cGpa
+        }
+    });
+    if (typeof account === typeof undefined)
+        throw Error("No account exists with the name " + userName);
+    return account;
+}
+let displayCgpa = function(account:Object) {
+    console.log(`${account[`name`]}'s CGPA is ${account['cGpa']}`)
+}
+try {
+    let mikeAcc = getAccountByName("Mike");
+    displayCgpa(mikeAcc);
+} catch (error) {
+    console.log(error);
+}
+
 //Don’t Pass Null
+let add = function(nums:number[]):number {
+    if(nums.includes(null)) throw Error("The array includes at least one invalid number")
+    let sum = 0;
+    nums.forEach(num => {
+        sum += num;
+    });
+    return sum;
+}
+try {
+    add([1,2,null]); //will throw proper Error
+} catch (error) {
+    console.log('Failure; ' + error)
+}
+
 }//End of chapter 7 - Error Handling
 
 
