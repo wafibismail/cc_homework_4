@@ -274,13 +274,48 @@ traverseAndDisplayNames(home);
 }//End of chapter 6 - Objects and Data Structures
 
 
-{//Start of chapter 7 - Error Handling - I might return to include these not-yet-covered parts:
-//Use exceptions rather than return codes
-//Write Your Try-Catch-Finally Statement First
-//Use Unchecked Exceptions
-//Provide Context with Exceptions
-//Define Exception Classes in Terms of a Caller’s Needs
+{//Start of chapter 7 - Error Handling
 //Define the Normal Flow
+interface ActWith {
+    describe:() => string;
+};
+class ShootWith implements ActWith {
+    #description:string;
+    constructor (weapon:Object) {
+        this.#description = "shot fired";
+        weapon['ammo']--;
+        weapon['cooldown'] += 1000;
+    }
+    describe = () => this.#description;
+}
+class Reload implements ActWith {
+    #description:string;
+    constructor (weapon:Object) {
+        this.#description = "item reloaded";
+        weapon['ammo'] = weapon['MAX_AMMO'];
+        weapon['cooldown'] += 6000;
+    }
+    describe = () => this.#description;
+}
+
+let isActive = true;
+let pistol = {
+    MAX_AMMO: 6,
+    ammo: 6,
+    cooldown: 1000,
+    act: ():ActWith => {
+        if (this.ammo) return new ShootWith(this);
+        return new Reload(this);
+    }
+}
+while (isActive) {
+    let cd = pistol.cooldown;
+    cd--;
+    if (cd == 0) {
+        let actionPerformed = pistol.act();
+        console.log(actionPerformed.describe());
+    }
+}
 
 //Don’t Return Null
 const ACCOUNTS = {
@@ -303,7 +338,7 @@ let getAccountByName = function(userName:string) {
         }
     });
     if (typeof account === typeof undefined)
-        throw Error("No account exists with the name " + userName);
+        throw ReferenceError("No account exists with the name " + userName);
     return account;
 }
 let displayCgpa = function(account:Object) {
@@ -318,7 +353,7 @@ try {
 
 //Don’t Pass Null
 let add = function(nums:number[]):number {
-    if(nums.includes(null)) throw Error("The array includes at least one invalid number")
+    if(nums.includes(null)) throw TypeError("The array includes at least one invalid number")
     let sum = 0;
     nums.forEach(num => {
         sum += num;
@@ -349,7 +384,7 @@ class UserNamesStorage {
     }
     #validateId(id:string) {
         if (id.length != 5 || isNaN(Number(id))) {
-            throw Error("Invalid id; Must be 5 digit string");
+            throw TypeError("Invalid id; Must be 5 digit string");
         }
     }
 

@@ -201,13 +201,36 @@ class Folder {
 }//End of chapter 6 - Objects and Data Structures
 
 
-{//Start of chapter 7 - Error Handling - I might return to include these not-yet-covered parts:
-//Use exceptions rather than return codes
-//Write Your Try-Catch-Finally Statement First
-//Use Unchecked Exceptions
-//Provide Context with Exceptions
-//Define Exception Classes in Terms of a Caller’s Needs
+{//Start of chapter 7 - Error Handling
 //Define the Normal Flow
+let isActive = true;
+let pistol = {
+    MAX_AMMO: 6,
+    ammo: 6,
+    cooldown: 1000,
+    shoot:() => {
+        if(this.ammo) this.ammo--;
+        else throw Error("No ammo left");
+        this.delay += 1000;
+    },
+    reload: () => {
+        this.ammo = this.MAX_AMMO;
+        this.delay += 6000;
+    }
+}
+while (isActive) {
+    let cd = pistol.cooldown;
+    cd--;
+    if (cd == 0) {
+        try {
+            pistol.shoot();
+            console.log("shot fired");
+        } catch (error) {
+            pistol.reload();//this special case can actually be implemented in & thus better suited in normal logic
+            console.log(error);
+        }
+    }
+}
 
 //Don’t Return Null
 const ACCOUNTS = {
