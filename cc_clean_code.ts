@@ -372,7 +372,7 @@ let controller = new DrawingController(new FakeDrawer);
 controller.drawCircle(p[0], 3);
 controller.drawRect(p[2], p[1]);
 controller.drawLine(p[4], p[3]);
-/*From making the Drawer interface available, the controller can be used with the API that does not yet exist */
+/*With the use of the Drawer interface, it becomes easier to implement the API that does not yet exist */
 class FutureDrawerAdapter implements Drawer {
     #api:Object;
     drawLine(start: Coord, end: Coord): void {
