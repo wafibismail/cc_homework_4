@@ -259,6 +259,6 @@ let controller = new FakeDrawingController;
 controller.drawCircle(p[0], 3);
 controller.drawRect(p[2], p[1]);
 controller.drawLine(p[4], p[3]);
-//with this style of coding, significant work needs to be done to implement the "future" code
+//with this style of coding, a bit of work needs to be done to implement the "future" code
 
 }//End of chapter 8 - Boundaries
